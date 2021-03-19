@@ -1,15 +1,12 @@
 import { useReducer, useEffect } from "react";
 import axios from "axios";
-import mockjsondata from "./mockdata.json";
+// import mockjsondata from "./mockdata.json";
 const ACTIONS = {
   MAKE_REQUEST: "make-request",
   GET_DATA: "get-data",
   ERROR: "error",
   UPDATE_HAS_NEXT_PAGE: "update-has-next-page",
 };
-
-// const BASE_URL =
-//   "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json";
 
 const BASE_URL =
   "https://secure-citadel-96358.herokuapp.com/https://jobs.github.com/positions.json";

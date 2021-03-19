@@ -1,32 +1,30 @@
-import "./App.css";
 import useFetchJobs from "./useFetchJobs";
-import { Container } from "react-bootstrap";
+import { useContext } from "react";
+import ThemeContext from "./context/ThemeContext";
+
 import { useState } from "react";
-import Job from "./components/Job";
+// import Job from "./components/Job";
 import JobsPagination from "./components/JobsPagination";
 import SearchForm from "./components/SearchForm";
+import NavBar from "./components/NavBar";
 import styled from "styled-components";
+import JobCardSmall from "./components/JobCardSmall";
+import JobCardBig from "./components/JobCardBig";
 
-// const StyledDiv = styled.div`
-//   color: pink;
-//   border-radius: 5px;
-//   background-color: #e9a0ff;
-//   button {
-//     background-color: #333;
-//     color: white;
-//     padding: 7px 20px;
-//     border: none;
-//     border-radius: 5px;
-//     cursor: pointer;
-//     &:hover {
-//       background-color: #494949;
-//     }
-//   }
-// `;
+const AppParent = styled.div`
+  background-color: ${(props) => (props.darkmode ? "#13131A" : "#FAFAFB")};
+  padding: 30px calc((100vw * 0.6) / 12);
+  transition: background-color 0.3s ease-out;
+`;
+
+const JobParent = styled.div`
+  display: flex;
+`;
 
 function App() {
   const [params, setParams] = useState({});
   const [page, setPage] = useState(1);
+  const { dark } = useContext(ThemeContext);
 
   const { jobs, loading, error, hasNextPage } = useFetchJobs(params, page);
 
@@ -43,20 +41,27 @@ function App() {
   }
 
   return (
-    <Container>
+    <AppParent darkmode={dark}>
+      <NavBar />
       <SearchForm params={params} onParamChange={handleParamChange} />
       <JobsPagination page={page} hasNextPage={hasNextPage} setPage={setPage} />
+
       {loading && <h1>loading...</h1>}
       {error && <h1>Error . Try refreshing.</h1>}
 
-      {jobs.map((job) => (
-        <Job key={job.id} job={job} />
-      ))}
+      <JobParent>
+        <div>
+          {jobs.map((job) => (
+            <JobCardSmall key={job.id} job={job} />
+          ))}
+        </div>
+
+        <JobCardBig />
+      </JobParent>
+
       <JobsPagination page={page} hasNextPage={hasNextPage} setPage={setPage} />
-    </Container>
+    </AppParent>
   );
 }
-
-// pagination 31 min
 
 export default App;
