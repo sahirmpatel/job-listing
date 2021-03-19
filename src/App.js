@@ -5,6 +5,25 @@ import { useState } from "react";
 import Job from "./components/Job";
 import JobsPagination from "./components/JobsPagination";
 import SearchForm from "./components/SearchForm";
+import styled from "styled-components";
+
+// const StyledDiv = styled.div`
+//   color: pink;
+//   border-radius: 5px;
+//   background-color: #e9a0ff;
+//   button {
+//     background-color: #333;
+//     color: white;
+//     padding: 7px 20px;
+//     border: none;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     &:hover {
+//       background-color: #494949;
+//     }
+//   }
+// `;
+
 function App() {
   const [params, setParams] = useState({});
   const [page, setPage] = useState(1);
