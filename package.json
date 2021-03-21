@@ -14,8 +14,8 @@
     "react-icons": "^4.2.0",
     "react-markdown": "^5.0.3",
     "react-scripts": "4.0.3",
+    "react-time-ago": "^6.2.2",
     "styled-components": "^5.2.1",
-    "timeago-react": "^3.0.2",
     "web-vitals": "^1.1.1"
   },
   "scripts": {

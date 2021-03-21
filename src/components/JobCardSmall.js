@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 import placeholderlogo from "../assets/company-logo.jpg";
-import TimeAgo from "timeago-react";
+import ReactTimeAgo from "react-time-ago";
+
+// styling
 
 const JobCard = styled.div`
   background-color: #1c1c24;
@@ -24,8 +26,8 @@ const JobCard = styled.div`
 `;
 
 const JobTitle = styled.h2`
-  font-size: 26px;
-  line-height: 34px;
+  font-size: 20px;
+  line-height: 28px;
   margin: 0;
   font-weight: 500;
 `;
@@ -68,15 +70,33 @@ const JobDetailsLabel = styled.span`
   }
 `;
 
+const NewTag = styled.span`
+  color: #0062ffff;
+  margin-right: 10px;
+`;
+
 // const JobDate = styled.p`
 //   font-size: 14px;
 // `;
 
-const JobCardSmall = ({ job }) => {
-  console.log("job:", job.title);
+// styling
+
+const NewOrNOt = ({ dateprovided }) => {
+  var oneday = 60 * 60 * 1000 * 24 * 2;
+  if (new Date() - new Date(dateprovided) < oneday) {
+    return <NewTag>New</NewTag>;
+  } else return null;
+};
+
+const JobCardSmall = ({ PassJobDetails, job }) => {
+  const PassJobDetailsHandle = () => {
+    PassJobDetails(job);
+  };
+
   const { dark } = useContext(ThemeContext);
+
   return (
-    <JobCard darkmode={dark}>
+    <JobCard darkmode={dark} onClick={PassJobDetailsHandle}>
       <Jobflex1>
         <div>
           <JobTitle> {job.title} </JobTitle>
@@ -95,11 +115,15 @@ const JobCardSmall = ({ job }) => {
           <JobDetailsLabel darkmode={dark}>{job.location}</JobDetailsLabel>
         </div>
         {/* <JobDate> {new Date(job.created_at).toLocaleDateString()}</JobDate> */}
-        <TimeAgo
+        {/* <TimeAgo
           style={{ fontSize: "14px" }}
           datetime={job.created_at}
           locale="'en_US'"
-        />
+        /> */}
+        <div style={{ display: "flex" }}>
+          <NewOrNOt dateprovided={job.created_at} />
+          <ReactTimeAgo date={job.created_at} locale="en-US" />
+        </div>
       </Jobflex2>
 
       {/* image algo */}

@@ -2,26 +2,33 @@ import React from "react";
 import ThemeContext from "../context/ThemeContext";
 import styled from "styled-components";
 import { useContext } from "react";
+import ReactMarkdown from "react-markdown";
 
 const JobCard = styled.div`
-  border: 1px solid white;
-  /* width: 40vw; */
-  color: white;
-  /* font-size: 30px; */
+  background-color: #1c1c24;
+  color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
+  background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
+  width: 45vw;
+  border-radius: 8px;
+  padding: 25px 30px;
+  height: 90vh;
+  overflow-y: scroll;
+  /* margin: 22px 0px; */
   position: sticky;
   margin-left: 3%;
   top: 35px;
   align-self: flex-start;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 `;
 
-const JobCardBig = () => {
+const JobCardBig = ({ jobdetails }) => {
+  const { dark } = useContext(ThemeContext);
+
   return (
-    <JobCard>
-      Hello bitch, nice TITS ahahahahah milky millky milky baby thirsty mommy
-      baby want milk suck suck suck suck hahahaha stupid cunt give me those big
-      udders you slut hahahaha tits tit titty me your caveman me use big titty
-      for big bitty hahaha honk honk honk slut cunt mommy honk honk milky baby
+    <JobCard darkmode={dark}>
+      <h1>{jobdetails.company}</h1>
+      <p>{jobdetails.location}</p>
+      <ReactMarkdown source={jobdetails.description} />
     </JobCard>
   );
 };
