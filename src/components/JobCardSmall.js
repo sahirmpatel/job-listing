@@ -16,12 +16,18 @@ const JobCard = styled.div`
   padding: 25px 30px;
   cursor: pointer;
   margin: 22px 0px;
+  transition: transform 150ms ease-in, box-shadow 150ms ease-in;
   &:first-child {
     margin-top: 0px;
   }
 
   &:hover {
-    background-color: ${(props) => (props.darkmode ? "#25252f" : "#f1f1f1")};
+    /* background-color: ${(props) =>
+      props.darkmode ? "#25252f" : "#f1f1f1"}; */
+    -webkit-box-shadow: 12px 12px 36px -13px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 12px 12px 36px -13px rgba(0, 0, 0, 0.2);
+    box-shadow: 12px 12px 36px -13px rgba(0, 0, 0, 0.2);
+    transform: translate(0px, -3px);
   }
 `;
 
