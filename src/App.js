@@ -68,7 +68,6 @@ function App() {
     <AppParent darkmode={dark}>
       <NavBar />
       <SearchForm params={params} onParamChange={handleParamChange} />
-      <JobsPagination page={page} hasNextPage={hasNextPage} setPage={setPage} />
 
       {loading && <h1>loading...</h1>}
       {error && <h1>Error . Try refreshing.</h1>}
