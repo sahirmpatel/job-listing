@@ -11,7 +11,8 @@ const JobCard = styled.div`
   background-color: #1c1c24;
   color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
-  width: 40vw;
+  /* removing width from here and adding it to its parent div in App.js */
+  /* width: 40vw; */
   border-radius: 8px;
   padding: 25px 30px;
   cursor: pointer;

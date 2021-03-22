@@ -20,6 +20,9 @@ const AppParent = styled.div`
 const JobParent = styled.div`
   display: flex;
 `;
+const JobListParent = styled.div`
+  width: 40vw;
+`;
 
 const initialdata = {
   id: "f3473ebc-ea63-49bf-8aae-33f69160b110",
@@ -73,7 +76,7 @@ function App() {
       {error && <h1>Error . Try refreshing.</h1>}
 
       <JobParent>
-        <div>
+        <JobListParent>
           {jobs.map((job) => (
             <JobCardSmall
               PassJobDetails={PassJobDetails}
@@ -81,7 +84,7 @@ function App() {
               job={job}
             />
           ))}
-        </div>
+        </JobListParent>
 
         <JobCardBig jobdetails={jobdetails} />
       </JobParent>
