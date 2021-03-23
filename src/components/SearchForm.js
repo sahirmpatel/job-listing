@@ -103,6 +103,7 @@ export default function SearchForm({ params, onParamChange }) {
           onChange={onParamChange}
           placeholder="Search by description / role ..."
           type="text"
+          autocomplete="off"
         />
       </SearchChildren>
       <SearchChildren>
@@ -113,6 +114,7 @@ export default function SearchForm({ params, onParamChange }) {
           onChange={onParamChange}
           placeholder="Preffered Location..."
           type="text"
+          autocomplete="off"
         />
       </SearchChildren>
       <CheckBoxParent>
