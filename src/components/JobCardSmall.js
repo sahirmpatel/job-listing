@@ -13,7 +13,7 @@ const JobCard = styled.div`
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
   /* removing width from here and adding it to its parent div in App.js */
   /* width: 40vw; */
-  background-color: ${(props) => (props.selected ? "blue" : "#1c1c24")};
+  /* background-color: ${(props) => (props.selected ? "blue" : "#1c1c24")}; */
   border-radius: 8px;
   padding: 25px 30px;
   cursor: pointer;
@@ -29,7 +29,7 @@ const JobCard = styled.div`
     -webkit-box-shadow: 12px 12px 36px -13px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 12px 12px 36px -13px rgba(0, 0, 0, 0.2);
     box-shadow: 12px 12px 36px -13px rgba(0, 0, 0, 0.2);
-    transform: translate(0px, -3px);
+    transform: translate(0px, -2px);
   }
 `;
 
