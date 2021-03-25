@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
@@ -11,17 +11,25 @@ const JobCard = styled.div`
   background-color: #1c1c24;
   color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
-  width: 40vw;
+  /* removing width from here and adding it to its parent div in App.js */
+  /* width: 40vw; */
+  background-color: ${(props) => (props.selected ? "blue" : "#1c1c24")};
   border-radius: 8px;
   padding: 25px 30px;
   cursor: pointer;
   margin: 22px 0px;
+  transition: transform 150ms ease-in, box-shadow 150ms ease-in;
   &:first-child {
     margin-top: 0px;
   }
 
   &:hover {
-    background-color: ${(props) => (props.darkmode ? "#25252f" : "#f1f1f1")};
+    /* background-color: ${(props) =>
+      props.darkmode ? "#25252f" : "#f1f1f1"}; */
+    -webkit-box-shadow: 12px 12px 36px -13px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 12px 12px 36px -13px rgba(0, 0, 0, 0.2);
+    box-shadow: 12px 12px 36px -13px rgba(0, 0, 0, 0.2);
+    transform: translate(0px, -3px);
   }
 `;
 
@@ -95,8 +103,18 @@ const JobCardSmall = ({ PassJobDetails, job }) => {
 
   const { dark } = useContext(ThemeContext);
 
+  const [isSelected, setIsSelected] = useState(false);
+  const toggleState = () => {
+    setIsSelected(!isSelected);
+    console.log("isSelected:", isSelected);
+  };
   return (
-    <JobCard darkmode={dark} onClick={PassJobDetailsHandle}>
+    <JobCard
+      darkmode={dark}
+      selected={isSelected}
+      onClick={PassJobDetailsHandle}
+      onMouseDown={toggleState}
+    >
       <Jobflex1>
         <div>
           <JobTitle> {job.title} </JobTitle>
