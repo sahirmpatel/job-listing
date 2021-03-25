@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
@@ -13,6 +13,7 @@ const JobCard = styled.div`
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
   /* removing width from here and adding it to its parent div in App.js */
   /* width: 40vw; */
+  background-color: ${(props) => (props.selected ? "blue" : "#1c1c24")};
   border-radius: 8px;
   padding: 25px 30px;
   cursor: pointer;
@@ -102,8 +103,18 @@ const JobCardSmall = ({ PassJobDetails, job }) => {
 
   const { dark } = useContext(ThemeContext);
 
+  const [isSelected, setIsSelected] = useState(false);
+  const toggleState = () => {
+    setIsSelected(!isSelected);
+    console.log("isSelected:", isSelected);
+  };
   return (
-    <JobCard darkmode={dark} onClick={PassJobDetailsHandle}>
+    <JobCard
+      darkmode={dark}
+      selected={isSelected}
+      onClick={PassJobDetailsHandle}
+      onMouseDown={toggleState}
+    >
       <Jobflex1>
         <div>
           <JobTitle> {job.title} </JobTitle>

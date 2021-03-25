@@ -5,7 +5,8 @@ import styled from "styled-components";
 import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 
-let isDarkTheme;
+let isDarkTheme = localStorage.getItem("darkTheme");
+console.log("isDarkTheme:", isDarkTheme);
 
 const DarkThemeColors = {
   inputcolor: "white",
@@ -20,6 +21,8 @@ const LightThemColors = {
 let CurrentThemeColors = isDarkTheme
   ? { ...DarkThemeColors }
   : { ...LightThemColors };
+
+console.log("CurrentThemeColors:", CurrentThemeColors);
 
 // styles
 const SearchParent = styled.div`
@@ -59,16 +62,17 @@ const StyledHiOutlineLocationMarker = styled(HiOutlineLocationMarker)`
 
 export default function SearchForm({ params, onParamChange }) {
   const { dark } = useContext(ThemeContext);
-  isDarkTheme = dark;
-  console.log("isDarkTheme:", isDarkTheme);
+  // isDarkTheme = dark;
   useEffect(() => {
-    isDarkTheme = dark ? true : false;
-  }, []);
-  useEffect(() => {
+    isDarkTheme = dark;
+
     CurrentThemeColors = isDarkTheme
       ? { ...DarkThemeColors }
       : { ...LightThemColors };
-  }, [isDarkTheme]);
+
+    console.log("refressd");
+  }, [dark]);
+
   return (
     // <form action="">
     //   <input
