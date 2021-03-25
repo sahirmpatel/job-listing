@@ -87,7 +87,7 @@ const CompanyName = styled.span`
 
 const JobLocation = styled(CompanyName)`
   margin-left: 10px;
-  color: white;
+  color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
 `;
 
 const ScrollContent = styled.div`
@@ -168,7 +168,7 @@ const JobCardBig = ({ jobdetails }) => {
         <DisplayFlexDiv>
           <div>
             <CompanyName> {jobdetails.company} </CompanyName>
-            <JobLocation> {jobdetails.location} </JobLocation>
+            <JobLocation darkmode={dark}> {jobdetails.location} </JobLocation>
           </div>
 
           <ReactTimeAgo date={jobdetails.created_at} locale="en-US" />

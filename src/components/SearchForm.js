@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 
-let isDarkTheme = localStorage.getItem("darkTheme");
+let isDarkTheme = false;
 console.log("isDarkTheme:", isDarkTheme);
 
 const DarkThemeColors = {
@@ -30,10 +30,13 @@ const SearchParent = styled.div`
   background: #e6e6e6;
   border-radius: 5px;
   height: 48px;
+  /* searchbar quick fix */
+  margin-top: 20px;
+  margin-bottom: 30px;
 `;
 
 const SearchChildren = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   flex: 2;
   input {
     overflow: visible;
@@ -46,7 +49,7 @@ const SearchChildren = styled.div`
   }
 `;
 const CheckBoxParent = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   flex: 1;
 `;
 

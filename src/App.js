@@ -32,9 +32,9 @@ const initialdata = {
   company: "dunder mifflin",
   company_url: "https://www.jacob.de/",
   location: "Karlsruhe",
-  title: "GOAT tickler (m/w/d)",
+  title: "Assistant Manager",
   description:
-    " Melde dich gerne bei mir Robert Henritzi (Head of IT) unter der Tel. 0721/ 94176-2700 oder mit einer Mail an henritzi@jacob.de, um ein erstes Kennenlernen per VideoCall zu vereinbaren oder bewirb dich direkt hier. ",
+    " We are looking for a Ruby on Rails Developer to help us develop an innovative new social network, that aims to enhance real-life communities through private, ad-free interaction. To apply you should have at least a few years of Ruby on Rails experience and have at least one consumer-focused Rails app that you can refer us to. You must be able to work effectively in Rails, including performing TDD. You will join a small, agile team. The team is remote, with members across the world. You should be passionate about the user experience and goal directed design.",
   how_to_apply:
     "[application form](https://t.gohiring.com/h/d921f1a65c45257705f709505c04cde82c9d6773771102d2d3e2b276f5f93a94)",
   company_logo:
