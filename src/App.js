@@ -24,6 +24,8 @@ const JobListParent = styled.div`
   width: 40vw;
 `;
 
+// TODO
+
 const initialdata = {
   id: "f3473ebc-ea63-49bf-8aae-33f69160b110",
   type: "Full Time",
@@ -67,6 +69,14 @@ function App() {
     setjobdetails(jobdetails);
   };
 
+  // function for changing color of selected small card to blue
+
+  const [chosen, setChosen] = useState();
+  const changechosen = (id) => {
+    setChosen(id);
+    console.log("chosen:", chosen);
+  };
+
   return (
     <AppParent darkmode={dark}>
       <NavBar />
@@ -82,6 +92,8 @@ function App() {
               PassJobDetails={PassJobDetails}
               key={job.id}
               job={job}
+              active={job.id === chosen}
+              changechosen={changechosen}
             />
           ))}
         </JobListParent>

@@ -13,7 +13,8 @@ const JobCard = styled.div`
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
   /* removing width from here and adding it to its parent div in App.js */
   /* width: 40vw; */
-  /* background-color: ${(props) => (props.selected ? "blue" : "#1c1c24")}; */
+  background-color: ${(props) => props.isactive && "#2B2ECF"};
+  color: ${(props) => props.isactive && "#e9e9ea"};
   border-radius: 8px;
   padding: 25px 30px;
   cursor: pointer;
@@ -96,25 +97,24 @@ const NewOrNOt = ({ dateprovided }) => {
   } else return null;
 };
 
-const JobCardSmall = ({ PassJobDetails, job }) => {
+const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
+  const onClickHandle = () => {
+    changechosenHandle();
+    PassJobDetailsHandle();
+  };
+
+  const changechosenHandle = () => {
+    changechosen(job.id);
+  };
+
   const PassJobDetailsHandle = () => {
     PassJobDetails(job);
   };
 
   const { dark } = useContext(ThemeContext);
 
-  const [isSelected, setIsSelected] = useState(false);
-  const toggleState = () => {
-    setIsSelected(!isSelected);
-    console.log("isSelected:", isSelected);
-  };
   return (
-    <JobCard
-      darkmode={dark}
-      selected={isSelected}
-      onClick={PassJobDetailsHandle}
-      onMouseDown={toggleState}
-    >
+    <JobCard darkmode={dark} isactive={active} onClick={onClickHandle}>
       <Jobflex1>
         <div>
           <JobTitle> {job.title} </JobTitle>
