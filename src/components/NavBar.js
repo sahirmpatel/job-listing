@@ -1,7 +1,15 @@
 import React, { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 import { BiSun, BiMoon } from "react-icons/bi";
+import { AiOutlineCode } from "react-icons/ai";
 import styled from "styled-components";
+
+// styles
+
+const Logo = styled(AiOutlineCode)`
+  font-size: 40px;
+  color: #5495ff;
+`;
 
 const HeaderBand = styled.div`
   display: flex;
@@ -22,11 +30,13 @@ const ThemeButton = styled.button`
   outline: none;
 `;
 
+// styles
+
 export default function NavBar() {
   const { dark, toggle } = useContext(ThemeContext);
   return (
     <HeaderBand>
-      <p>Logo</p>
+      <Logo />
       <div>
         <ThemeButton theme={dark} onClick={() => toggle()}>
           {dark ? (
