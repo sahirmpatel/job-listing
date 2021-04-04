@@ -6,9 +6,19 @@ import styled from "styled-components";
 
 // styles
 
+const LogoParent = styled.div`
+  font-size: 20px;
+  color: #5495ff;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-family: "Roboto Mono", monospace;
+`;
+
 const Logo = styled(AiOutlineCode)`
   font-size: 40px;
   color: #5495ff;
+  margin-right: 5px;
 `;
 
 const HeaderBand = styled.div`
@@ -36,7 +46,10 @@ export default function NavBar() {
   const { dark, toggle } = useContext(ThemeContext);
   return (
     <HeaderBand>
-      <Logo />
+      <LogoParent>
+        <Logo />
+        Dev Jobs
+      </LogoParent>
       <div>
         <ThemeButton theme={dark} onClick={() => toggle()}>
           {dark ? (

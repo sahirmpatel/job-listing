@@ -25,9 +25,9 @@ const JobCard = styled.div`
   margin-left: 3%;
   top: 35px;
   align-self: flex-start;
-
   scroll-behavior: smooth;
-
+  border: 0;
+  box-shadow: 0 2px 6px 0 hsl(0deg 0% 0% / 8%);
   /* hiding scroll bar */
   ::-webkit-scrollbar {
     width: 2px;
@@ -159,7 +159,6 @@ const JobCardBig = ({ jobdetails }) => {
         }
         alt={jobdetails.company}
       />
-
       <JobSubHeading darkmode={dark}>
         <DisplayFlexDiv>
           <JobTitle>{jobdetails.title}</JobTitle>
@@ -174,7 +173,6 @@ const JobCardBig = ({ jobdetails }) => {
           <ReactTimeAgo date={jobdetails.created_at} locale="en-US" />
         </DisplayFlexDiv>
       </JobSubHeading>
-
       <ScrollContent>
         <ReactMarkdown source={jobdetails.description} />
         <HowtoApply>How to apply</HowtoApply>

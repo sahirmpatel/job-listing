@@ -13,6 +13,10 @@ const SearchParent = styled.div`
   height: 55px;
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
   color: ${(props) => (props.darkmode ? "#FFFFFF" : "#000")};
+
+  border: 0;
+  box-shadow: 0 2px 6px 0 hsl(0deg 0% 0% / 8%);
+
   /* searchbar quick fix */
   margin-top: 20px;
   margin-bottom: 30px;
@@ -95,7 +99,7 @@ export default function SearchForm({ params, onParamChange }) {
           autocomplete="off"
         />
       </SearchChildren>
-      <CheckBoxParent>
+      {/* <CheckBoxParent>
         <input
           onChange={onParamChange}
           value={params.full_time}
@@ -105,7 +109,7 @@ export default function SearchForm({ params, onParamChange }) {
           type="checkbox"
         />
         <span>Full-Time Jobs only</span>
-      </CheckBoxParent>
+      </CheckBoxParent> */}
 
       <ResetButton type="reset">Reset</ResetButton>
     </SearchParent>
