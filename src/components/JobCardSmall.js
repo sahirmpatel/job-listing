@@ -8,14 +8,16 @@ import ReactTimeAgo from "react-time-ago";
 // styling
 
 const JobCard = styled.div`
-  background-color: #1c1c24;
+  position: relative;
   color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
   /* removing width from here and adding it to its parent div in App.js */
   /* width: 40vw; */
-  background-color: ${(props) => props.isactive && "#2B2ECF"};
-  color: ${(props) => props.isactive && "#e9e9ea"};
+  /* background-color: ${(props) => props.isactive && "#2B2ECF"}; */
+  /* color: ${(props) => props.isactive && "#e9e9ea"}; */
   border-radius: 8px;
+  border: 0;
+  box-shadow: 0 2px 6px 0 hsl(0deg 0% 0% / 8%);
   padding: 25px 30px;
   cursor: pointer;
   margin: 22px 0px;
@@ -31,6 +33,20 @@ const JobCard = styled.div`
     -moz-box-shadow: 12px 12px 36px -13px rgba(0, 0, 0, 0.2);
     box-shadow: 12px 12px 36px -13px rgba(0, 0, 0, 0.2);
     transform: translate(0px, -2px);
+  }
+
+  .band {
+    background-color: ${(props) => props.isactive && "#0062ff"};
+
+    height: 100%;
+    width: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 8px 0px 0px 8px;
+    -moz-border-radius: 8px 0px 0px 8px;
+    -webkit-border-radius: 8px 0px 0px 8px;
+    border: 0px solid #000000;
   }
 `;
 
@@ -81,7 +97,13 @@ const JobDetailsLabel = styled.span`
 
 const NewTag = styled.span`
   color: #0062ffff;
+  font-size: 14px;
   margin-right: 10px;
+`;
+
+const ReactTimeAgoStyled = styled(ReactTimeAgo)`
+  font-size: 14px;
+  opacity: 0.8;
 `;
 
 // const JobDate = styled.p`
@@ -115,6 +137,7 @@ const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
 
   return (
     <JobCard darkmode={dark} isactive={active} onClick={onClickHandle}>
+      <div className="band"></div>
       <Jobflex1>
         <div>
           <JobTitle> {job.title} </JobTitle>
@@ -140,7 +163,7 @@ const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
         /> */}
         <div style={{ display: "flex" }}>
           <NewOrNOt dateprovided={job.created_at} />
-          <ReactTimeAgo date={job.created_at} locale="en-US" />
+          <ReactTimeAgoStyled date={job.created_at} locale="en-US" />
         </div>
       </Jobflex2>
 

@@ -61,6 +61,17 @@ function App() {
       return { ...prevParams, [param]: value };
     });
   }
+  // function for reset params
+  function handleParamReset(e) {
+    // creating key value pair
+    const param = e.target.name;
+    const value = e.target.value;
+    // setting page back to one because its a new request
+    setPage(1);
+    setParams((prevParams) => {
+      return { ...prevParams, [param]: value };
+    });
+  }
 
   const [jobdetails, setjobdetails] = useState(initialdata);
   // function for passing small job card details to the big one
@@ -100,7 +111,18 @@ function App() {
 
         <JobCardBig jobdetails={jobdetails} />
       </JobParent>
-
+      <p
+        onClick={() => {
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          });
+        }}
+      >
+        {" "}
+        Back to Top
+      </p>
       <JobsPagination page={page} hasNextPage={hasNextPage} setPage={setPage} />
     </AppParent>
   );
