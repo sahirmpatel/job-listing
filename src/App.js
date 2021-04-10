@@ -1,8 +1,8 @@
 import useFetchJobs from "./useFetchJobs";
 import { useContext } from "react";
 import ThemeContext from "./context/ThemeContext";
-
-import { useState } from "react";
+import { BsArrowUp } from "react-icons/bs";
+import { useState, useEffect } from "react";
 // import Job from "./components/Job";
 import JobsPagination from "./components/JobsPagination";
 import SearchForm from "./components/SearchForm";
@@ -22,6 +22,20 @@ const JobParent = styled.div`
 `;
 const JobListParent = styled.div`
   width: 40vw;
+`;
+
+const Gototopbutton = styled.button`
+  position: fixed;
+  bottom: 8%;
+  right: 2%;
+  padding: 15px;
+  font-size: 20px;
+  border: 0;
+  box-shadow: 0 2px 6px 0 hsl(0deg 0% 0% / 8%);
+  border-radius: 5px;
+  color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
+  background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
+  display: ${(props) => props.isVisible && "none"};
 `;
 
 // TODO
@@ -88,6 +102,21 @@ function App() {
     console.log("chosen:", chosen);
   };
 
+  // hiding "go to top button" when scrolled up and toggling it
+  const [showButton, setShowButton] = useState(true);
+
+  const hideButton = () => {
+    if (window.scrollY > 500) {
+      setShowButton(false);
+    } else {
+      setShowButton(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", hideButton);
+  }, []);
+
   return (
     <AppParent darkmode={dark}>
       <NavBar />
@@ -96,7 +125,7 @@ function App() {
       {error && <h1>Error . Try refreshing.</h1>}
 
       <JobParent>
-        {loading ? (
+        {!loading ? (
           <JobListParent>
             {[1, 2, 3, 4, 5, 6, 7].map((job) => (
               <JobCardSmall
@@ -122,7 +151,17 @@ function App() {
 
         <JobCardBig jobdetails={jobdetails} />
       </JobParent>
-      <p
+
+      <JobsPagination
+        page={page}
+        hasNextPage={hasNextPage}
+        resetBigCard={PassJobDetails}
+        setPage={setPage}
+      />
+
+      <Gototopbutton
+        isVisible={showButton}
+        darkmode={dark}
         onClick={() => {
           window.scroll({
             top: 0,
@@ -131,10 +170,8 @@ function App() {
           });
         }}
       >
-        {" "}
-        Back to Top
-      </p>
-      <JobsPagination page={page} hasNextPage={hasNextPage} setPage={setPage} />
+        <BsArrowUp />
+      </Gototopbutton>
     </AppParent>
   );
 }
