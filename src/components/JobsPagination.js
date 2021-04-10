@@ -15,12 +15,26 @@ import { Pagination } from "react-bootstrap";
 //   box-shadow: inset 9px 10px 26px -7px rgba(0, 0, 0, 0.27);
 // `;
 
-export default function JobsPagination({ page, setPage, hasNextPage }) {
+export default function JobsPagination({
+  page,
+  setPage,
+  hasNextPage,
+  resetBigCard,
+}) {
   function adjustPage(amount) {
     setPage((prevPage) => prevPage + amount);
   }
+  const onClickHandle = () => {
+    resetBigCard();
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <Pagination>
+    <Pagination onClick={onClickHandle}>
       {page !== 1 && <Pagination.Prev onClick={() => adjustPage(-1)} />}
       {page !== 1 && (
         <Pagination.Item onClick={() => setPage(1)}>1</Pagination.Item>
