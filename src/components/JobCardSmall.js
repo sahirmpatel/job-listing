@@ -124,6 +124,14 @@ const NewOrNOt = ({ dateprovided }) => {
   } else return null;
 };
 
+const WordSplitter = (text, numOfWords) => {
+  if (text.length < numOfWords) {
+    return text;
+  } else {
+    return `${text.slice(0, numOfWords)}...`;
+  }
+};
+
 const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
   const onClickHandle = () => {
     changechosenHandle();
@@ -148,11 +156,19 @@ const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
           <div>
             <JobTitle>
               {" "}
-              {job ? job.title : <Skeleton height={20} width={200} />}{" "}
+              {job ? (
+                WordSplitter(job.title, 30)
+              ) : (
+                <Skeleton height={20} width={200} />
+              )}{" "}
             </JobTitle>
             <CompanyName>
               {" "}
-              {job ? job.company : <Skeleton height={20} width={200} />}
+              {job ? (
+                WordSplitter(job.company, 30)
+              ) : (
+                <Skeleton height={20} width={200} />
+              )}
             </CompanyName>
           </div>
 
@@ -172,7 +188,7 @@ const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
               {job ? job.type : <Skeleton width={40} />}
             </JobDetailsLabel>
             <JobDetailsLabel darkmode={dark}>
-              {job ? job.location : <Skeleton width={40} />}
+              {job ? WordSplitter(job.location, 30) : <Skeleton width={40} />}
             </JobDetailsLabel>
           </div>
 
