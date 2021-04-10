@@ -34,7 +34,7 @@ const initialdata = {
   company: "dunder mifflin",
   company_url: "https://www.jacob.de/",
   location: "Karlsruhe",
-  title: "Assistant Manager",
+  title: "",
   description:
     " We are looking for a Ruby on Rails Developer to help us develop an innovative new social network, that aims to enhance real-life communities through private, ad-free interaction. To apply you should have at least a few years of Ruby on Rails experience and have at least one consumer-focused Rails app that you can refer us to. You must be able to work effectively in Rails, including performing TDD. You will join a small, agile team. The team is remote, with members across the world. You should be passionate about the user experience and goal directed design.",
   how_to_apply:
@@ -73,7 +73,7 @@ function App() {
     });
   }
 
-  const [jobdetails, setjobdetails] = useState(initialdata);
+  const [jobdetails, setjobdetails] = useState();
   // function for passing small job card details to the big one
 
   const PassJobDetails = (jobdetails) => {
@@ -92,22 +92,33 @@ function App() {
     <AppParent darkmode={dark}>
       <NavBar />
       <SearchForm params={params} onParamChange={handleParamChange} />
-
-      {loading && <h1>loading...</h1>}
+      {/* {loading && <h1>loading...</h1>} */}
       {error && <h1>Error . Try refreshing.</h1>}
 
       <JobParent>
-        <JobListParent>
-          {jobs.map((job) => (
-            <JobCardSmall
-              PassJobDetails={PassJobDetails}
-              key={job.id}
-              job={job}
-              active={job.id === chosen}
-              changechosen={changechosen}
-            />
-          ))}
-        </JobListParent>
+        {loading ? (
+          <JobListParent>
+            {[1, 2, 3, 4, 5, 6, 7].map((job) => (
+              <JobCardSmall
+                PassJobDetails={PassJobDetails}
+                key={job.id}
+                changechosen={changechosen}
+              />
+            ))}
+          </JobListParent>
+        ) : (
+          <JobListParent>
+            {jobs.map((job) => (
+              <JobCardSmall
+                PassJobDetails={PassJobDetails}
+                key={job.id}
+                job={job}
+                active={job.id === chosen}
+                changechosen={changechosen}
+              />
+            ))}
+          </JobListParent>
+        )}
 
         <JobCardBig jobdetails={jobdetails} />
       </JobParent>

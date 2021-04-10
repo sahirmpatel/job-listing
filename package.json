@@ -12,6 +12,7 @@
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
+    "react-loading-skeleton": "^2.2.0",
     "react-markdown": "^5.0.3",
     "react-scripts": "4.0.3",
     "react-time-ago": "^6.2.2",

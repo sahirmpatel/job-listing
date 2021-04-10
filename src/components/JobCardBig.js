@@ -11,6 +11,7 @@ import image4 from "../assets/compressed-mastheads/4.jpg";
 import image5 from "../assets/compressed-mastheads/5.jpg";
 import image6 from "../assets/compressed-mastheads/6.jpg";
 import ReactTimeAgo from "react-time-ago";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const JobCard = styled.div`
   background-color: #1c1c24;
@@ -56,6 +57,16 @@ const MastheadImage = styled.img`
 `;
 
 const Logoimg = styled.img`
+  height: 60px;
+  border: 3px solid #ffffff;
+  padding: 4px;
+  border-radius: 5px;
+  position: absolute;
+  top: 80px;
+  left: 30px;
+  background: white;
+`;
+const LogoimgPlaceholder = styled(Skeleton)`
   height: 60px;
   border: 3px solid #ffffff;
   padding: 4px;
@@ -113,13 +124,13 @@ const ScrollContent = styled.div`
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #40404c59;
+    background: rgba(192, 192, 192, 0.493);
     border-radius: 2px;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #c0bebe;
   }
 `;
 
@@ -150,35 +161,77 @@ const JobCardBig = ({ jobdetails }) => {
   useEffect(() => {
     randomimage = imagearr[Math.floor(Math.random() * 6)];
   }, [jobdetails]);
+
   return (
-    <JobCard darkmode={dark}>
-      <MastheadImage src={randomimage} alt="masthead" />
-      <Logoimg
-        src={
-          jobdetails.company_logo ? jobdetails.company_logo : placeholderlogo
-        }
-        alt={jobdetails.company}
-      />
-      <JobSubHeading darkmode={dark}>
-        <DisplayFlexDiv>
-          <JobTitle>{jobdetails.title}</JobTitle>
-        </DisplayFlexDiv>
+    <SkeletonTheme color={dark && "#363642"} highlightColor={dark && "#56565f"}>
+      <JobCard darkmode={dark}>
+        <MastheadImage src={randomimage} alt="masthead" />
 
-        <DisplayFlexDiv>
-          <div>
-            <CompanyName> {jobdetails.company} </CompanyName>
-            <JobLocation darkmode={dark}> {jobdetails.location} </JobLocation>
-          </div>
+        {jobdetails ? (
+          <Logoimg
+            src={
+              jobdetails.company_logo
+                ? jobdetails.company_logo
+                : placeholderlogo
+            }
+            alt={jobdetails.company}
+          />
+        ) : (
+          <LogoimgPlaceholder width={70} />
+        )}
 
-          <ReactTimeAgo date={jobdetails.created_at} locale="en-US" />
-        </DisplayFlexDiv>
-      </JobSubHeading>
-      <ScrollContent>
-        <ReactMarkdown source={jobdetails.description} />
-        <HowtoApply>How to apply</HowtoApply>
-        <ReactMarkdown source={jobdetails.how_to_apply} />{" "}
-      </ScrollContent>
-    </JobCard>
+        <JobSubHeading darkmode={dark}>
+          <DisplayFlexDiv>
+            <JobTitle>
+              {jobdetails ? (
+                jobdetails.title
+              ) : (
+                <Skeleton height={20} width={100} />
+              )}
+            </JobTitle>
+          </DisplayFlexDiv>
+
+          <DisplayFlexDiv>
+            <div>
+              <CompanyName>
+                {" "}
+                {jobdetails ? (
+                  jobdetails.company
+                ) : (
+                  <Skeleton height={20} width={100} />
+                )}{" "}
+              </CompanyName>
+              <JobLocation darkmode={dark}>
+                {" "}
+                {jobdetails ? (
+                  jobdetails.location
+                ) : (
+                  <Skeleton height={20} width={100} />
+                )}{" "}
+              </JobLocation>
+            </div>
+
+            {jobdetails && (
+              <ReactTimeAgo date={jobdetails.created_at} locale="en-US" />
+            )}
+          </DisplayFlexDiv>
+        </JobSubHeading>
+
+        {/* added skeleton conditional statement inside ScrollContent div */}
+
+        <ScrollContent>
+          {jobdetails ? (
+            <div>
+              <ReactMarkdown source={jobdetails.description} />
+              <HowtoApply>How to apply</HowtoApply>
+              <ReactMarkdown source={jobdetails.how_to_apply} />
+            </div>
+          ) : (
+            <Skeleton count={20} />
+          )}
+        </ScrollContent>
+      </JobCard>
+    </SkeletonTheme>
   );
 };
 

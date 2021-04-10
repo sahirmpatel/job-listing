@@ -4,7 +4,7 @@ import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 import placeholderlogo from "../assets/company-logo.jpg";
 import ReactTimeAgo from "react-time-ago";
-
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 // styling
 
 const JobCard = styled.div`
@@ -68,6 +68,11 @@ const Image = styled.img`
   height: 40px;
   border-radius: 7px;
   margin-left: 30px;
+`;
+const Imageskeleton = styled(Skeleton)`
+  height: 40px;
+  border-radius: 7px;
+  margin-left: 40px;
 `;
 
 const Jobflex2 = styled.div`
@@ -136,39 +141,52 @@ const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
   const { dark } = useContext(ThemeContext);
 
   return (
-    <JobCard darkmode={dark} isactive={active} onClick={onClickHandle}>
-      <div className="band"></div>
-      <Jobflex1>
-        <div>
-          <JobTitle> {job.title} </JobTitle>
-          <CompanyName> {job.company}</CompanyName>
-        </div>
+    <SkeletonTheme color={dark && "#363642"} highlightColor={dark && "#56565f"}>
+      <JobCard darkmode={dark} isactive={active} onClick={job && onClickHandle}>
+        <div className="band"></div>
+        <Jobflex1>
+          <div>
+            <JobTitle>
+              {" "}
+              {job ? job.title : <Skeleton height={20} width={200} />}{" "}
+            </JobTitle>
+            <CompanyName>
+              {" "}
+              {job ? job.company : <Skeleton height={20} width={200} />}
+            </CompanyName>
+          </div>
 
-        <Image
-          src={job.company_logo ? job.company_logo : placeholderlogo}
-          alt={job.company}
-        />
-      </Jobflex1>
+          {job ? (
+            <Image
+              src={job.company_logo ? job.company_logo : placeholderlogo}
+              alt={job.company}
+            />
+          ) : (
+            <Imageskeleton width={60} />
+          )}
+        </Jobflex1>
 
-      <Jobflex2>
-        <div>
-          <JobDetailsLabel darkmode={dark}>{job.type}</JobDetailsLabel>
-          <JobDetailsLabel darkmode={dark}>{job.location}</JobDetailsLabel>
-        </div>
-        {/* <JobDate> {new Date(job.created_at).toLocaleDateString()}</JobDate> */}
-        {/* <TimeAgo
-          style={{ fontSize: "14px" }}
-          datetime={job.created_at}
-          locale="'en_US'"
-        /> */}
-        <div style={{ display: "flex" }}>
-          <NewOrNOt dateprovided={job.created_at} />
-          <ReactTimeAgoStyled date={job.created_at} locale="en-US" />
-        </div>
-      </Jobflex2>
+        <Jobflex2>
+          <div>
+            <JobDetailsLabel darkmode={dark}>
+              {job ? job.type : <Skeleton width={40} />}
+            </JobDetailsLabel>
+            <JobDetailsLabel darkmode={dark}>
+              {job ? job.location : <Skeleton width={40} />}
+            </JobDetailsLabel>
+          </div>
 
-      {/* image algo */}
-    </JobCard>
+          {job ? (
+            <div style={{ display: "flex" }}>
+              <NewOrNOt dateprovided={job.created_at} />
+              <ReactTimeAgoStyled date={job.created_at} locale="en-US" />
+            </div>
+          ) : (
+            <Skeleton />
+          )}
+        </Jobflex2>
+      </JobCard>
+    </SkeletonTheme>
   );
 };
 
