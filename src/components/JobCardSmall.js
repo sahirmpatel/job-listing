@@ -225,7 +225,7 @@ const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
               {job ? job.type : <Skeleton width={40} />}
             </JobDetailsLabel>
             <JobDetailsLabel darkmode={dark}>
-              {job ? WordSplitter(job.location, 20) : <Skeleton width={40} />}
+              {job ? WordSplitter(job.location, 15) : <Skeleton width={40} />}
             </JobDetailsLabel>
           </div>
 
