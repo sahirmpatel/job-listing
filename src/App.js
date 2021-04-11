@@ -2,6 +2,7 @@ import useFetchJobs from "./useFetchJobs";
 import { useContext } from "react";
 import ThemeContext from "./context/ThemeContext";
 import { BsArrowUp } from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
 import { useState, useEffect } from "react";
 // import Job from "./components/Job";
 import JobsPagination from "./components/JobsPagination";
@@ -19,14 +20,18 @@ const AppParent = styled.div`
 
 const JobParent = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 const JobListParent = styled.div`
-  width: 40vw;
+  /* width: 45vw;
+  @media screen and (max-width: 600px) {
+    width: 90vw;
+  } */
 `;
 
 const Gototopbutton = styled.button`
   position: fixed;
-  bottom: 8%;
+  bottom: 4%;
   right: 2%;
   padding: 15px;
   font-size: 20px;
@@ -37,6 +42,25 @@ const Gototopbutton = styled.button`
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
   display: ${(props) => props.isVisible && "none"};
 `;
+
+const MobileBanner = styled.div`
+  display: none;
+  @media screen and (max-width: 600px) {
+    display: flex;
+    color: white;
+    background: #0062ff;
+    padding: 15px 10px 5px 10px;
+    justify-content: space-between;
+    align-items: baseline;
+    button {
+      border: 0;
+      background: inherit;
+      color: white;
+      font-size: 20px;
+    }
+  }
+`;
+//styles
 
 // TODO
 
@@ -115,64 +139,84 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("scroll", hideButton);
+    setbannerOpen(true);
   }, []);
 
+  //usestate for mobile banner
+
+  const [bannerOpen, setbannerOpen] = useState();
+
   return (
-    <AppParent darkmode={dark}>
-      <NavBar />
-      <SearchForm params={params} onParamChange={handleParamChange} />
-      {/* {loading && <h1>loading...</h1>} */}
-      {error && <h1>Error . Try refreshing.</h1>}
+    <>
+      {bannerOpen && (
+        <MobileBanner>
+          <p> 💡 Better experienced on PC / Laptop </p>
+          <button
+            onClick={() => {
+              setbannerOpen((state) => !state);
+            }}
+          >
+            {" "}
+            <AiOutlineClose />{" "}
+          </button>
+        </MobileBanner>
+      )}
+      <AppParent darkmode={dark}>
+        <NavBar />
+        <SearchForm params={params} onParamChange={handleParamChange} />
+        {/* {loading && <h1>loading...</h1>} */}
+        {error && <h1>Error . Try refreshing.</h1>}
 
-      <JobParent>
-        {!loading ? (
-          <JobListParent>
-            {[1, 2, 3, 4, 5, 6, 7].map((job) => (
-              <JobCardSmall
-                PassJobDetails={PassJobDetails}
-                key={job.id}
-                changechosen={changechosen}
-              />
-            ))}
-          </JobListParent>
-        ) : (
-          <JobListParent>
-            {jobs.map((job) => (
-              <JobCardSmall
-                PassJobDetails={PassJobDetails}
-                key={job.id}
-                job={job}
-                active={job.id === chosen}
-                changechosen={changechosen}
-              />
-            ))}
-          </JobListParent>
-        )}
+        <JobParent>
+          {!loading ? (
+            <JobListParent>
+              {[1, 2, 3, 4, 5, 6, 7].map((job) => (
+                <JobCardSmall
+                  PassJobDetails={PassJobDetails}
+                  key={job.id}
+                  changechosen={changechosen}
+                />
+              ))}
+            </JobListParent>
+          ) : (
+            <JobListParent>
+              {jobs.map((job) => (
+                <JobCardSmall
+                  PassJobDetails={PassJobDetails}
+                  key={job.id}
+                  job={job}
+                  active={job.id === chosen}
+                  changechosen={changechosen}
+                />
+              ))}
+            </JobListParent>
+          )}
 
-        <JobCardBig jobdetails={jobdetails} />
-      </JobParent>
+          <JobCardBig jobdetails={jobdetails} />
+        </JobParent>
 
-      <JobsPagination
-        page={page}
-        hasNextPage={hasNextPage}
-        resetBigCard={PassJobDetails}
-        setPage={setPage}
-      />
+        <JobsPagination
+          page={page}
+          hasNextPage={hasNextPage}
+          resetBigCard={PassJobDetails}
+          setPage={setPage}
+        />
 
-      <Gototopbutton
-        isVisible={showButton}
-        darkmode={dark}
-        onClick={() => {
-          window.scroll({
-            top: 0,
-            left: 0,
-            behavior: "smooth",
-          });
-        }}
-      >
-        <BsArrowUp />
-      </Gototopbutton>
-    </AppParent>
+        <Gototopbutton
+          isVisible={showButton}
+          darkmode={dark}
+          onClick={() => {
+            window.scroll({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
+          <BsArrowUp />
+        </Gototopbutton>
+      </AppParent>
+    </>
   );
 }
 

@@ -17,7 +17,7 @@ const JobCard = styled.div`
   background-color: #1c1c24;
   color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
-  width: 45vw;
+  /* width: 45vw; */
   border-radius: 8px;
   /* padding: 25px 30px; */
   padding-bottom: 30px;
@@ -42,6 +42,12 @@ const JobCard = styled.div`
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+
+  /* mobile media queries */
+
+  @media screen and (max-width: 600px) {
+    display: none;
   }
 `;
 

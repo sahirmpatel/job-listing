@@ -20,6 +20,11 @@ const SearchParent = styled.div`
   /* searchbar quick fix */
   margin-top: 20px;
   margin-bottom: 30px;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    height: 100%;
+  }
 `;
 
 const SearchChildren = styled.div`
@@ -36,13 +41,10 @@ const SearchChildren = styled.div`
     width: 85%;
     color: inherit;
   }
-`;
-const CheckBoxParent = styled.div`
-  /* border: 1px solid black; */
-  flex: 2;
-  span {
-    opacity: 0.8;
-    margin-left: 12px;
+
+  @media screen and (max-width: 600px) {
+    height: 50px;
+    width: 100%;
   }
 `;
 
@@ -67,6 +69,14 @@ const ResetButton = styled.button`
   border: 0px solid #000000;
   &:hover {
     background-color: #0257e0;
+  }
+  @media screen and (max-width: 600px) {
+    margin-top: 5px;
+    height: 50px;
+    width: 100%;
+    border-radius: 0px 0px 5px 5px;
+    -moz-border-radius: 0px 0px 5px 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
   }
 `;
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
+import MobileJobDetails from "./MobileJobDetails";
 import placeholderlogo from "../assets/company-logo.jpg";
 import ReactTimeAgo from "react-time-ago";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
@@ -12,7 +13,8 @@ const JobCard = styled.div`
   color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
   /* removing width from here and adding it to its parent div in App.js */
-  /* width: 40vw; */
+  /* edit : Commenting width from app.js and adding it here , because bigcard width matches searchbar width now */
+  width: 40vw;
   /* background-color: ${(props) => props.isactive && "#2B2ECF"}; */
   /* color: ${(props) => props.isactive && "#e9e9ea"}; */
   border-radius: 8px;
@@ -48,6 +50,14 @@ const JobCard = styled.div`
     -webkit-border-radius: 8px 0px 0px 8px;
     border: 0px solid #000000;
   }
+
+  @media screen and (max-width: 600px) {
+    padding: 25px 15px;
+    width: 90vw;
+    .band {
+      display: none;
+    }
+  }
 `;
 
 const JobTitle = styled.h2`
@@ -62,12 +72,24 @@ const CompanyName = styled.h3`
   opacity: 0.8;
   line-height: 28px;
   margin: 20px 0px;
+
+  @media screen and (max-width: 600px) {
+    margin: 0px 0px 10px 0px;
+    font-size: 16px;
+  }
 `;
 
 const Image = styled.img`
   height: 40px;
   border-radius: 7px;
   margin-left: 30px;
+  @media screen and (max-width: 600px) {
+    margin: auto;
+
+    margin-bottom: 15px;
+    width: 60%;
+    height: auto;
+  }
 `;
 const Imageskeleton = styled(Skeleton)`
   height: 40px;
@@ -84,6 +106,9 @@ const Jobflex2 = styled.div`
 const Jobflex1 = styled(Jobflex2)`
   display: flex;
   align-items: flex-start;
+  @media screen and (max-width: 600px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const JobDetailsLabel = styled.span`
@@ -188,7 +213,7 @@ const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
               {job ? job.type : <Skeleton width={40} />}
             </JobDetailsLabel>
             <JobDetailsLabel darkmode={dark}>
-              {job ? WordSplitter(job.location, 30) : <Skeleton width={40} />}
+              {job ? WordSplitter(job.location, 12) : <Skeleton width={40} />}
             </JobDetailsLabel>
           </div>
 
@@ -201,6 +226,7 @@ const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
             <Skeleton />
           )}
         </Jobflex2>
+        <MobileJobDetails jobdetails={job} />
       </JobCard>
     </SkeletonTheme>
   );
