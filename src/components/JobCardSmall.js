@@ -123,6 +123,15 @@ const JobDetailsLabel = styled.span`
     color: ${(props) => (props.darkmode ? "#e0e1e2" : "#6E6ED9")};
     margin-left: 8px;
   }
+
+  @media screen and (max-width: 600px) {
+    &:first-child {
+      display: none;
+    }
+    &:last-child {
+      margin-left: 0px;
+    }
+  }
 `;
 
 const NewTag = styled.span`
@@ -213,7 +222,7 @@ const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
               {job ? job.type : <Skeleton width={40} />}
             </JobDetailsLabel>
             <JobDetailsLabel darkmode={dark}>
-              {job ? WordSplitter(job.location, 12) : <Skeleton width={40} />}
+              {job ? WordSplitter(job.location, 20) : <Skeleton width={40} />}
             </JobDetailsLabel>
           </div>
 
