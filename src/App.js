@@ -52,6 +52,10 @@ const MobileBanner = styled.div`
     padding: 15px 10px 5px 10px;
     justify-content: space-between;
     align-items: baseline;
+    /* align-self: flex-start; */
+    position: sticky;
+    top: 0;
+    z-index: 99;
     button {
       border: 0;
       background: inherit;
