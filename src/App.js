@@ -83,26 +83,12 @@ const MobileBanner = styled.div`
     }
   }
 `;
+const ErrorMessage = styled.h1`
+  color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
+`;
 //styles
 
 // TODO
-
-const initialdata = {
-  id: "f3473ebc-ea63-49bf-8aae-33f69160b110",
-  type: "Full Time",
-  url: "https://jobs.github.com/positions/f3473ebc-ea63-49bf-8aae-33f69160b110",
-  created_at: "Thu Mar 18 12:38:41 UTC 2021",
-  company: "dunder mifflin",
-  company_url: "https://www.jacob.de/",
-  location: "Karlsruhe",
-  title: "",
-  description:
-    " We are looking for a Ruby on Rails Developer to help us develop an innovative new social network, that aims to enhance real-life communities through private, ad-free interaction. To apply you should have at least a few years of Ruby on Rails experience and have at least one consumer-focused Rails app that you can refer us to. You must be able to work effectively in Rails, including performing TDD. You will join a small, agile team. The team is remote, with members across the world. You should be passionate about the user experience and goal directed design.",
-  how_to_apply:
-    "[application form](https://t.gohiring.com/h/d921f1a65c45257705f709505c04cde82c9d6773771102d2d3e2b276f5f93a94)",
-  company_logo:
-    "https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaGFkIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2d52e1fa301b30aaad4701bb63d1bc3bbca18ab9/JACOB%20Elektronik%20GmbH.png",
-};
 
 function App() {
   const [params, setParams] = useState({});
@@ -125,12 +111,11 @@ function App() {
   // function for reset params
   function handleParamReset(e) {
     // creating key value pair
-    const param = e.target.name;
-    const value = e.target.value;
+
     // setting page back to one because its a new request
     setPage(1);
     setParams((prevParams) => {
-      return { ...prevParams, [param]: value };
+      return { ...prevParams, description: "", location: "" };
     });
   }
 
@@ -186,9 +171,18 @@ function App() {
       )}
       <AppParent darkmode={dark}>
         <NavBar />
-        <SearchForm params={params} onParamChange={handleParamChange} />
+        <SearchForm
+          params={params}
+          onParamChange={handleParamChange}
+          onParamReset={handleParamReset}
+        />
         {/* {loading && <h1>loading...</h1>} */}
-        {error && <h1>Error . Try refreshing.</h1>}
+        {error && (
+          <ErrorMessage darkmode={dark}>
+            {" "}
+            🚧Error . Try refreshing.🚧
+          </ErrorMessage>
+        )}
 
         <JobParent>
           {loading ? (
@@ -196,12 +190,12 @@ function App() {
               {[1, 2, 3, 4, 5, 6, 7].map((job) => (
                 <JobCardSmall
                   PassJobDetails={PassJobDetails}
-                  key={job.id}
+                  key={job}
                   changechosen={changechosen}
                 />
               ))}
             </JobListParent>
-          ) : (
+          ) : jobs.length > 0 ? (
             <JobListParent>
               {jobs.map((job) => (
                 <JobCardSmall
@@ -213,6 +207,11 @@ function App() {
                 />
               ))}
             </JobListParent>
+          ) : (
+            <ErrorMessage darkmode={dark}>
+              {" "}
+              🚧Please broaden your search.🚧
+            </ErrorMessage>
           )}
 
           <JobCardBig jobdetails={jobdetails} />
