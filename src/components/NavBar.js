@@ -11,7 +11,7 @@ const LogoParent = styled.div`
   color: #5495ff;
   display: flex;
   align-items: center;
-  font-weight: 600;
+  font-weight: 700;
   font-family: "Roboto Mono", monospace;
 `;
 
@@ -48,7 +48,7 @@ export default function NavBar() {
     <HeaderBand>
       <LogoParent>
         <Logo />
-        Dev Jobs
+        DevHire
       </LogoParent>
       <div>
         <ThemeButton theme={dark} onClick={() => toggle()}>
