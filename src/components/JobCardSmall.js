@@ -13,12 +13,12 @@ const JobCard = styled.div`
   color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
   /* removing width from here and adding it to its parent div in App.js */
-  /* edit : Commenting width from app.js and adding it here , because bigcard width matches searchbar width now */
-  width: 40vw;
+  /* width: 40vw; */
+
   /* background-color: ${(props) => props.isactive && "#2B2ECF"}; */
   /* color: ${(props) => props.isactive && "#e9e9ea"}; */
   border-radius: 8px;
-  border: 0;
+  border: ${(props) => props.isactive && "1px solid #0062ff"};
   box-shadow: 0 2px 6px 0 hsl(0deg 0% 0% / 8%);
   padding: 25px 30px;
   cursor: pointer;
@@ -40,11 +40,11 @@ const JobCard = styled.div`
   .band {
     background-color: ${(props) => props.isactive && "#0062ff"};
 
-    height: 100%;
+    height: 101%;
     width: 10px;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -1px;
+    left: -1px;
     border-radius: 8px 0px 0px 8px;
     -moz-border-radius: 8px 0px 0px 8px;
     -webkit-border-radius: 8px 0px 0px 8px;
@@ -53,7 +53,7 @@ const JobCard = styled.div`
 
   @media screen and (max-width: 600px) {
     padding: 25px 15px;
-    width: 90vw;
+
     .band {
       display: none;
     }

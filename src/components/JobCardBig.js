@@ -17,13 +17,13 @@ const JobCard = styled.div`
   background-color: #1c1c24;
   color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
-  /* width: 45vw; */
+  width: 46vw;
   border-radius: 8px;
   /* padding: 25px 30px; */
   padding-bottom: 30px;
   /* margin: 22px 0px; */
   position: sticky;
-  margin-left: 3%;
+
   top: 35px;
   align-self: flex-start;
   scroll-behavior: smooth;

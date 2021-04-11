@@ -23,10 +23,10 @@ const JobParent = styled.div`
   justify-content: space-between;
 `;
 const JobListParent = styled.div`
-  /* width: 45vw;
+  width: 40vw;
   @media screen and (max-width: 600px) {
     width: 90vw;
-  } */
+  }
 `;
 
 const Gototopbutton = styled.button`
@@ -168,7 +168,7 @@ function App() {
         {error && <h1>Error . Try refreshing.</h1>}
 
         <JobParent>
-          {!loading ? (
+          {loading ? (
             <JobListParent>
               {[1, 2, 3, 4, 5, 6, 7].map((job) => (
                 <JobCardSmall
