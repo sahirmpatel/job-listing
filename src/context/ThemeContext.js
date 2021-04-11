@@ -1,7 +1,7 @@
 import React, { createContext, useState, useLayoutEffect } from "react";
 
 const ThemeContext = createContext({
-  dark: true,
+  dark: false,
   toggle: () => {},
 });
 
@@ -13,16 +13,18 @@ export function ThemeProvider(props) {
   // paints the app before it renders elements
   useLayoutEffect(() => {
     const lastTheme = window.localStorage.getItem("darkTheme");
+    console.log("lastTheme:", lastTheme);
 
-    if (lastTheme === "true") {
+    if (lastTheme === true) {
+      setDark(false);
+      //   applyTheme(lightTheme);
+    }
+
+    if (!lastTheme || lastTheme === false) {
       setDark(true);
       //   applyTheme(darkTheme);
     }
 
-    if (!lastTheme || lastTheme === "false") {
-      setDark(false);
-      //   applyTheme(lightTheme);
-    }
     // if state changes, repaints the app
   }, [dark]);
 
