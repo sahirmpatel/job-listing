@@ -95,6 +95,9 @@ const Imageskeleton = styled(Skeleton)`
   height: 40px;
   border-radius: 7px;
   margin-left: 40px;
+  @media screen and (max-width: 600px) {
+    display: none !important;
+  }
 `;
 
 const Jobflex2 = styled.div`

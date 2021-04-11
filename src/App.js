@@ -29,11 +29,24 @@ const JobListParent = styled.div`
   }
 `;
 
+// const Gototopbutton = styled.button`
+//   position: fixed;
+//   bottom: 4%;
+//   right: 2%;
+//   padding: 10px;
+//   font-size: 20px;
+//   border: 0;
+//   box-shadow: 0 2px 6px 0 hsl(0deg 0% 0% / 8%);
+//   border-radius: 5px;
+//   color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
+//   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
+//   display: ${(props) => props.isVisible && "none"};
+// `;
 const Gototopbutton = styled.button`
   position: fixed;
   bottom: 4%;
   right: 2%;
-  padding: 15px;
+  padding: 10px;
   font-size: 20px;
   border: 0;
   box-shadow: 0 2px 6px 0 hsl(0deg 0% 0% / 8%);
@@ -41,6 +54,12 @@ const Gototopbutton = styled.button`
   color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
   background-color: ${(props) => (props.darkmode ? "#1c1c24" : "#FFFFFF")};
   display: ${(props) => props.isVisible && "none"};
+
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
 `;
 
 const MobileBanner = styled.div`
