@@ -131,7 +131,6 @@ function App() {
   const [chosen, setChosen] = useState();
   const changechosen = (id) => {
     setChosen(id);
-    console.log("chosen:", chosen);
   };
 
   // hiding "go to top button" when scrolled up and toggling it
@@ -149,6 +148,17 @@ function App() {
     window.addEventListener("scroll", hideButton);
     setbannerOpen(true);
   }, []);
+
+  // autoselect code
+  let firstJob, firstJobId;
+  useEffect(() => {
+    if (jobs[0]) {
+      firstJob = jobs[0];
+      firstJobId = jobs[0].id;
+      changechosen(firstJobId);
+      PassJobDetails(firstJob);
+    }
+  }, [loading]);
 
   //usestate for mobile banner
 
@@ -187,6 +197,7 @@ function App() {
         <JobParent>
           {loading ? (
             <JobListParent>
+              {/* placeholder / dummy cards  */}
               {[1, 2, 3, 4, 5, 6, 7].map((job) => (
                 <JobCardSmall
                   PassJobDetails={PassJobDetails}
