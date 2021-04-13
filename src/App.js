@@ -210,7 +210,7 @@ function App() {
           ) : (
             <ErrorMessage darkmode={dark}>
               {" "}
-              🚧Please broaden your search.🚧
+              Please broaden your search 🔍
             </ErrorMessage>
           )}
 

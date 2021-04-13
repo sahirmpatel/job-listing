@@ -104,7 +104,7 @@ export default function SearchForm({ params, onParamChange, onParamReset }) {
           value={params.location}
           name="location"
           onChange={onParamChange}
-          placeholder="Preffered Location..."
+          placeholder="Preferred Location ..."
           type="text"
           autoComplete="off"
         />
