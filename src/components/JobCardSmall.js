@@ -6,6 +6,8 @@ import MobileJobDetails from "./MobileJobDetails";
 import placeholderlogo from "../assets/company-logo.jpg";
 import ReactTimeAgo from "react-time-ago";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import WordCutter from "react-word-cutter";
+
 // styling
 
 const JobCard = styled.div`
@@ -194,15 +196,15 @@ const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
             <JobTitle>
               {" "}
               {job ? (
-                WordSplitter(job.title, 30)
+                <WordCutter limit={25}>{job.title}</WordCutter>
               ) : (
-                <Skeleton height={20} width={200} />
+                <Skeleton height={25} width={200} />
               )}{" "}
             </JobTitle>
             <CompanyName>
               {" "}
               {job ? (
-                WordSplitter(job.company, 30)
+                <WordCutter limit={20}>{job.company}</WordCutter>
               ) : (
                 <Skeleton height={20} width={200} />
               )}
@@ -225,7 +227,11 @@ const JobCardSmall = ({ PassJobDetails, job, changechosen, active }) => {
               {job ? job.type : <Skeleton width={40} />}
             </JobDetailsLabel>
             <JobDetailsLabel darkmode={dark}>
-              {job ? WordSplitter(job.location, 15) : <Skeleton width={40} />}
+              {job ? (
+                <WordCutter limit={15}>{job.location}</WordCutter>
+              ) : (
+                <Skeleton width={40} />
+              )}
             </JobDetailsLabel>
           </div>
 
