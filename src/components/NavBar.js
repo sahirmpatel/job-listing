@@ -52,12 +52,14 @@ export default function NavBar() {
   return (
     
     <HeaderBand darkmode={dark}>
+      <Link to="/" >
       <LogoParent>
         <Logo />
         DevHire
       </LogoParent>
+      </Link>
       <li>
-              <Link to="/">Home</Link>
+              
             </li>
             <li>
               <Link to="/joblistings">Jobs</Link>

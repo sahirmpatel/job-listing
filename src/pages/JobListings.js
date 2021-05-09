@@ -14,7 +14,7 @@ import JobCardBig from "../components/JobCardBig";
 
 const AppParent = styled.div`
   background-color: ${(props) => (props.darkmode ? "#13131A" : "#FAFAFB")};
-  padding: 30px calc((100vw * 0.6) / 12);
+  // padding: 30px calc((100vw * 0.6) / 12);
   transition: background-color 0.3s ease-out;
 `;
 

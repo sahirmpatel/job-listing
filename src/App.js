@@ -1,4 +1,4 @@
-import React from 'react'
+import {React,useContext} from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,15 +6,25 @@ import {
   Link
 } from "react-router-dom";
 import NavBar from './components/NavBar';
-
+import ThemeContext from "./context/ThemeContext";
 import JobListings from './pages/JobListings'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
+import styled from 'styled-components'
+
+const MainAppDiv = styled.div`
+background-color: ${(props) => (props.darkmode ? "#13131A" : "#FAFAFB")};
+color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
+padding: 30px calc((100vw * 0.6) / 12);
+transition: background-color 0.3s ease-out;
+`
+
 const App = () => {
+  const { dark } = useContext(ThemeContext);
   return (
     <Router>
       
-    <div>
+    <MainAppDiv darkmode={dark} > 
     
         <NavBar/>
        {/* A <Switch> looks through its children <Route>s and
@@ -31,7 +41,7 @@ const App = () => {
           </Route>
         </Switch>
       
-    </div>
+    </MainAppDiv>
     </Router>
   )
 }
