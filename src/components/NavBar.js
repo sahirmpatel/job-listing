@@ -3,7 +3,6 @@ import ThemeContext from "../context/ThemeContext";
 import { BiSun, BiMoon } from "react-icons/bi";
 import { AiOutlineCode } from "react-icons/ai";
 import styled from "styled-components";
-
 import {
   Link
 } from "react-router-dom";
@@ -20,7 +19,7 @@ const LogoParent = styled.div`
 `;
 
 const Logo = styled(AiOutlineCode)`
-  font-size: 40px;
+  font-size: 30px;
   color: #5495ff;
   margin-right: 5px;
 `;
@@ -29,7 +28,16 @@ const HeaderBand = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: ${(props) => (props.darkmode ? "#13131A" : "#FAFAFB")};
+  padding-top:5px;
+  padding-bottom:5px;
+  align-items: flex-end;
 `;
+
+const HeaderBand_2nddiv=styled.div`
+a{
+  margin:0px 20px;
+}
+`
 
 const ThemeButton = styled.button`
   background-color: transparent;
@@ -52,22 +60,24 @@ export default function NavBar() {
   return (
     
     <HeaderBand darkmode={dark}>
+
+      <div className="">
       <Link to="/" >
       <LogoParent>
         <Logo />
         DevHire
       </LogoParent>
       </Link>
-      <li>
+    
+             
+      </div>
+     
+        
               
-            </li>
-            <li>
-              <Link to="/joblistings">Jobs</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-      <div>
+    
+      <HeaderBand_2nddiv>
+      <Link to="/joblistings">Jobs</Link>
+      <Link to="/login">Login</Link>
         <ThemeButton theme={dark} onClick={() => toggle()}>
           {dark ? (
             <BiMoon style={{ color: "#E9E9EA" }} />
@@ -75,7 +85,7 @@ export default function NavBar() {
             <BiSun style={{ color: "#3A3A46" }} />
           )}
         </ThemeButton>
-      </div>
+      </HeaderBand_2nddiv>
     </HeaderBand>
     
   );

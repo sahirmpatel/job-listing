@@ -15,7 +15,7 @@ import styled from 'styled-components'
 const MainAppDiv = styled.div`
 background-color: ${(props) => (props.darkmode ? "#13131A" : "#FAFAFB")};
 color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
-padding: 30px calc((100vw * 0.6) / 12);
+padding: 0px calc((100vw * 0.6) / 12) 0px calc((100vw * 0.6) / 12);
 transition: background-color 0.3s ease-out;
 `
 

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const LandingMainDiv=styled.div`
-height:100vh;
+height:calc(100vh - 40px);
 display:flex;
 justify-content:center;
 align-items:center;
