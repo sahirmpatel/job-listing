@@ -1,6 +1,10 @@
 import { useReducer, useEffect } from "react";
-import axios from "axios";
+import ghapi from "./api";
+import axios from 'axios'
+
+// Use the mockjsondata whenever making ui changes - to prevent overuse of the api
 import mockjsondata from "./mockdata.json";
+
 const ACTIONS = {
   MAKE_REQUEST: "make-request",
   GET_DATA: "get-data",
@@ -8,8 +12,11 @@ const ACTIONS = {
   UPDATE_HAS_NEXT_PAGE: "update-has-next-page",
 };
 
-const BASE_URL =
-  "https://secure-citadel-96358.herokuapp.com/https://jobs.github.com/positions.json";
+
+// Adding additional methods to the axios instance
+ghapi.CancelToken = axios.CancelToken;
+ghapi.isCancel = axios.isCancel;
+
 
 function reducer(state, action) {
   switch (action.type) {
@@ -38,10 +45,11 @@ export default function useFetchJobs(params, page) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    const cancelToken1 = axios.CancelToken.source();
+    
+    const cancelToken1 = ghapi.CancelToken.source();
     dispatch({ type: ACTIONS.MAKE_REQUEST });
-    axios
-      .get(BASE_URL, {
+    ghapi
+      .get('/', {
         cancelToken: cancelToken1.token,
         params: { markdown: true, page: page, ...params },
       })
@@ -49,13 +57,13 @@ export default function useFetchJobs(params, page) {
         dispatch({ type: ACTIONS.GET_DATA, payload: { jobs: res.data } });
       })
       .catch((e) => {
-        if (axios.isCancel(e)) return;
+        if (ghapi.isCancel(e)) return;
         dispatch({ type: ACTIONS.ERROR, payload: { error: e } });
       });
 
-    const cancelToken2 = axios.CancelToken.source();
-    axios
-      .get(BASE_URL, {
+    const cancelToken2 = ghapi.CancelToken.source();
+    ghapi
+      .get('/', {
         params: { markdown: true, page: page + 1, ...params },
         cancelToken: cancelToken2.token,
       })
@@ -66,7 +74,7 @@ export default function useFetchJobs(params, page) {
         });
       })
       .catch((e) => {
-        if (axios.isCancel(e)) return;
+        if (ghapi.isCancel(e)) return;
         dispatch({ type: ACTIONS.ERROR, payload: { error: e } });
       });
 
