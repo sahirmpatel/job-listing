@@ -1,5 +1,10 @@
 body,
 html {
   font-family: "Inter", sans-serif;
+  /* dont change overflow . it messes with large job div */
   /* overflow-x: hidden; */
+  
+}
+a:hover{
+  text-decoration:none;
 }
