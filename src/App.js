@@ -64,24 +64,30 @@ const Gototopbutton = styled.button`
 
 const MobileBanner = styled.div`
   display: none;
-  @media screen and (max-width: 600px) {
-    display: flex;
+  /* @media screen and (max-width: 600px) { */
+  display: flex;
+  color: white;
+  background: #0062ff;
+  padding: 15px 10px 5px 10px;
+  /* justify-content: space-between; */
+  justify-content: center;
+  align-items: baseline;
+  /* align-self: flex-start; */
+  position: sticky;
+  top: 0;
+  z-index: 99;
+
+  button {
+    border: 0;
+    background: inherit;
     color: white;
-    background: #0062ff;
-    padding: 15px 10px 5px 10px;
-    justify-content: space-between;
-    align-items: baseline;
-    /* align-self: flex-start; */
-    position: sticky;
-    top: 0;
-    z-index: 99;
-    button {
-      border: 0;
-      background: inherit;
-      color: white;
-      font-size: 20px;
-    }
+    font-size: 20px;
   }
+  a {
+    color: white;
+    text-decoration: underline;
+  }
+  /* } */
 `;
 const ErrorMessage = styled.h1`
   color: ${(props) => (props.darkmode ? "#e9e9ea" : "#40404C")};
@@ -168,7 +174,15 @@ function App() {
     <>
       {bannerOpen && (
         <MobileBanner>
-          <p> 💡 Better experienced on PC / Laptop </p>
+          {/* <p> 💡 Better experienced on PC / Laptop </p> */}
+          <p>
+            Due to{" "}
+            <a href="https://jobs.github.com/api" target="_blank">
+              GitHub shutting down its API{" "}
+            </a>{" "}
+            we are unable to fetch any jobs . We are working on switching to a
+            new API , till then this page will use mockdata{" "}
+          </p>
           <button
             onClick={() => {
               setbannerOpen((state) => !state);
